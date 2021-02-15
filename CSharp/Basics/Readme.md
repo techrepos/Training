@@ -1,5 +1,34 @@
 ## Day1 : C# Basics
 
+### [Table of Contents](#table-of-contents)
+1. [Structure](#structure)
+
+2. [Methods](#methods)
+    - [Consuming Methods](#consuming-methods)
+    - [Methods with params](#methods-with-params)
+    - [Pass params to method as reference](#pass-params-to-method-as-reference)
+    - [Using `out` keyword to pass value to methods](#Using-out-keyword-to-pass-value-to-methods)
+    - [Arbitary no of params in a method](#arbitary-no-of-params-in-a-method)
+    - [Default values for parameters](#default-values-for-parameters)
+    - [Named Arguments](#named-arguments)
+
+3. [Class](#class)
+    - [Instantiating class](#instantiating-class)
+
+4. [String Management](#string-management)
+    - [Concatenation](#concatenation)
+    - [Replace a string](#replace-a-string)
+    - [Replace all occurances](#replace-all-occurances)
+    - [Escape backslash](#escape-backslash)
+    - [Verbatim String](#verbatim-string)
+
+5. [String Interpolation](#string-interpolation)
+
+6. [Exception Handling](#exception-handling)
+    - [Custom Exceptions](#custom-exceptions)
+    - [Exception filters](#exception-filters)
+
+
 ## Structure
 `using` keyword is used to import the namespaces into the program
 A C# class will reside inside a namespace
@@ -455,7 +484,7 @@ public class Employee
 }
 ```
 
-Instantiating class
+### Instantiating class
 
 Now in the main method, use the following snippet to create an object of the `Employee` class
 
@@ -478,7 +507,7 @@ Output
 Amal Dev
 ```
 
-Another way for creating an object
+**Another way for creating an object**
 
 ```csharp
 Employee empNew = new Employee { EmployeeId = 222, FirstName = "Joe", LastName = "Doe" };
@@ -597,7 +626,7 @@ Console.WriteLine("Yes \\ No"); //escaping back slash , output : Yes \ No
 Yes \ No
 ```
 
-### Verbatim String
+### Verbatim String 
 
 ```csharp
 Console.WriteLine(@"In a verbatim string \ everything is literal: \n & \t"); //is notified by the @ symbol, output : In a verbatim string \ everything is literal: \n & \t
@@ -608,7 +637,7 @@ Console.WriteLine(@"In a verbatim string \ everything is literal: \n & \t"); //i
 In a verbatim string \ everything is literal: \n & \t
 ```
 
-## String Interpolation
+## String Interpolation 
 
 ```csharp
 string msg1 = "hello";
@@ -627,4 +656,113 @@ hello World
 hello World
 Insert "hello" between curly braces: {message here} World
 
+```
+
+## Exception Handling 
+
+- Are handled using try..catch..finally block
+- try block should have at least a catch block or a finally block
+- Can have multiple catch block
+- If you have a finally block, then statements inside it will execute even if the catch block has a return statement
+
+```csharp
+FileStream file = null;
+FileInfo fileInfo = null;
+
+try
+{
+    fileInfo = new FileInfo("./file1.txt");
+
+    file = fileInfo.Open(FileMode.Open);
+    file.WriteByte(0xF);
+}
+catch (FileNotFoundException e)
+{
+    Console.WriteLine($"File not found exception {e.Message}");
+    return;
+}
+catch (UnauthorizedAccessException e)
+{
+    Console.WriteLine($"Unauthorized exception {e.Message}");
+}
+catch (Exception e)
+{
+    Console.WriteLine(e.Message);
+}
+finally
+{
+    file?.Close();
+}
+```
+### Custom Exceptions 
+
+- Can create custom exceptions by inheriting the `Exception` class
+
+
+```csharp
+public class InvalidResponseException : Exception
+{
+
+    
+    public InvalidResponseException(int InputValue)
+        : base(String.Format("Invalid response, your response code was {0}", InputValue.ToString()))
+    {
+
+    }
+}
+
+
+public string CustomExceptionDemo()
+{
+    
+    try
+    {
+        var client = new HttpClient();
+        var streamTask = client.GetStringAsync("http://www.google.in/");
+        var responseText =  streamTask.Result;
+        throw new InvalidResponseException(250);
+        return responseText;
+    }
+    catch(InvalidResponseException e)
+    {
+        return e.Message;
+    }
+    catch (Exception e) 
+    {
+
+        return e.Message;
+    }
+}
+}
+```
+
+### Exception filters 
+- Introduced in C# 6
+- Can specify condition along with the catch block, the statement inside it will be executed only if both conditions are met
+
+```csharp
+try
+{
+    var client = new HttpClient();
+    var streamTask = client.GetStringAsync("http://www.google.com/test1");
+
+    //var responseText =  streamTask.Result;
+    return streamTask.Result;
+}
+catch (AggregateException e)  when (e.InnerExceptions.First().Message.Contains("404"))
+{
+    return "Not Found";
+}
+catch (HttpRequestException e ) when (e.Message.Contains("301"))
+{
+    return "Site Moved";
+}
+catch (HttpRequestException e) when (e.Message.Contains("404"))
+{
+    return "Page Not Found";
+}
+catch (HttpRequestException e)
+{
+    return e.Message;
+}
 ```
