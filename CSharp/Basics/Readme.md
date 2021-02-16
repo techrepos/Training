@@ -11,9 +11,15 @@
     - [Arbitary no of params in a method](#arbitary-no-of-params-in-a-method)
     - [Default values for parameters](#default-values-for-parameters)
     - [Named Arguments](#named-arguments)
+    - [Expression Bodied Members](#expression-bodied-members)
 
 3. [Class](#class)
     - [Instantiating class](#instantiating-class)
+    - [Properties](#properties)
+        - [Read Only Property](#read-only-property)
+        - [Write-Only Property](#write-only-property)
+        - [Read-Write Properties](#read-write-properties)
+        - [Automatic Properties](#automatic-properties)
 
 4. [String Management](#string-management)
     - [Concatenation](#concatenation)
@@ -457,6 +463,34 @@ namespace Basics
 ```bash
 Hello Amal
 ```
+
+### Expression Bodied Members
+- Introduced with C# 6.0 and enhanced in v7.0
+- Is a new way of writing code to make it more readable and concise
+- Can be applied to
+    - Constructor
+    - Destructor
+    - Property getter and setter
+    - Methods
+- Can only be used if any of the above has only a single statement
+
+**Syntax**
+```html
+member => expression;
+```
+Example
+```csharp
+private static int Add(int firstArg, int secondArg)
+{
+   return a + b;
+}
+
+// can be rewritten as
+
+private static int Add(int firstArg, int secondArg) => a + b;
+
+
+```
 ## Class
 
 Create a new file for creating an `Employee` class. Save it as `Employee.cs`
@@ -564,6 +598,77 @@ namespace Basics
     }
 }
 
+```
+### Properties
+
+- A member of a class which is used to set and get the data from a data field of a class
+- Types of properties
+    - Read-only property
+    - Write only property
+    - Read Write property
+    - Auto-implemented property
+
+**Read Only Property**
+
+- Only allows you to read values from it.
+- Will get a compile time error if you try to assign value
+- It will only have  get accessor
+```csharp
+//read only property
+private string lastName;
+public string LastName
+{
+    get { return lastName; }
+
+}
+```
+
+**Write-Only Property**
+
+- Only allows to store values
+- Will only have set accessor
+- Again a compile time error will be generated if you try to read data from it
+
+```csharp
+//write only property
+private string address;
+public string Address
+{
+    set { address = value; }
+
+}
+```
+
+**Read-Write Properties**
+
+- Allows you to store and retrieve data
+- Will have both get and set accessor
+
+```csharp
+//read write properties
+private string firstName;
+public string FirstName
+{
+    get { return firstName; }
+    set { firstName = value; }
+}
+
+//equivalent expression bodied syntax
+
+```
+**Automatic Properties**
+- Compiler automatically creates the *private anonymous* backing fields
+
+```csharp
+//automatic properties
+public string EmailAddress { get; set; }
+```
+
+**Set default value while creating the property**
+
+```csharp
+//initializes a empty string rather than a null value
+public string EmailAddress { get; set; } = String.Empty;
 ```
 
 ## String Management
