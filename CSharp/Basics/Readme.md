@@ -20,17 +20,18 @@
         - [Write-Only Property](#write-only-property)
         - [Read-Write Properties](#read-write-properties)
         - [Automatic Properties](#automatic-properties)
-
-4. [String Management](#string-management)
+4. [Interface](#inteface)
+5. [Inheritance](#inheritance)
+6. [String Management](#string-management)
     - [Concatenation](#concatenation)
     - [Replace a string](#replace-a-string)
     - [Replace all occurances](#replace-all-occurances)
     - [Escape backslash](#escape-backslash)
     - [Verbatim String](#verbatim-string)
 
-5. [String Interpolation](#string-interpolation)
+7. [String Interpolation](#string-interpolation)
 
-6. [Exception Handling](#exception-handling)
+8. [Exception Handling](#exception-handling)
     - [Custom Exceptions](#custom-exceptions)
     - [Exception filters](#exception-filters)
 
@@ -670,7 +671,68 @@ public string EmailAddress { get; set; }
 //initializes a empty string rather than a null value
 public string EmailAddress { get; set; } = String.Empty;
 ```
+## Interface
+- `interface` keyword  is used to define an interface
+- Covnention is to give a name starting with an `I`
+- can contain declaration of methods, events, properties
+- cannot have access specifiers for members, all are public by default
+- An interface can inherit one or more interfaces
+- When a class implements an interface it should provide definitions for all the members defined in the interface
+Syntax
+```html
+interface <interface name>{
 
+}
+```
+Example 
+```csharp
+//definition
+interface IOperations
+{
+    void AddData(int Id, String Name);
+    bool UpdateData(int Id);
+    bool DeleteData(int Id);
+
+}
+
+//usage
+
+class EmployeeManagement : IOperations
+{
+    public void AddData(int Id, String Name)
+    {
+        //code for inserting data
+    }
+
+    public bool UpdateData(int Id)
+    {
+        //code for updating data
+    }
+
+    public bool DeleteData(int Id)
+    {
+        //code for updating data
+    }
+}
+```
+
+## Inheritance
+
+- A class can be derived from more than one class or interface  
+- The child(derived class inherits the properties and members defined in the parent(base) class
+- Also, child(derived) class can have its own method implementations
+### Base & Derived Classes
+
+Syntax
+```html
+<acess-specifier> class <base_class> {
+   ...
+}
+
+class <derived_class> : <base_class> {
+   ...
+}
+```
 ## String Management
 
 ### Concatenation
