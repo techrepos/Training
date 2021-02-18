@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="DLL\CSharpBasics.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="DLL\CSharpBasics.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DemoLib\DemoLib.csproj" />
+  </ItemGroup>
+
+</Project>
