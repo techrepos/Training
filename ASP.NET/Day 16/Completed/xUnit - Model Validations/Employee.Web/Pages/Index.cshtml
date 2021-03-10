@@ -1,0 +1,26 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div id="data" class="text-center">
+   @Model.Text
+</div>
+@section Scripts
+{
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            type: "GET",
+           
+            url: 'https://localhost:44381/api/Employee',
+
+            success: function (data) {
+                $("#data").html(data);
+            }
+        });
+    });
+   
+</script>
+}
