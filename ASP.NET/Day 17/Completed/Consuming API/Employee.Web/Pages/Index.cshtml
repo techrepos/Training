@@ -1,0 +1,36 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<table>
+    <tr>
+        <td style="width:50px;padding-right:5px">ID</td>
+        <td style="width:50px;padding-right:5px">Name</td>
+        <td style="width:50px;padding-right:5px">Country</td>
+    </tr>
+
+    @foreach (var item in Model.Employees)
+    {
+
+        <tr>
+            <td>
+                @item.Id
+            </td>
+            <td>
+                @item.Name
+            </td>
+            <td>
+                @item.Country
+            </td>
+
+        </tr>
+    }
+</table>
+@section Scripts
+{
+    <script>
+       
+    </script>
+}
