@@ -61,5 +61,16 @@ namespace Employee.Tests
             Assert.IsType<List<EmployeeEntity>>(retdata.Value);
 
         }
+
+        [Theory]
+        [InlineData(1)]
+        [InlineData(-1)]
+        [InlineData(100)]
+        public void GetEmployeeDetail_Test(int value)
+        {
+            var retdata = _empController.GetEmployee(value);
+
+            Assert.IsType<ActionResult<EmployeeEntity>>(retdata);
+        }
     }
 }
