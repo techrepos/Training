@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20210305135434_Updated Department.cs" />
+    <Compile Remove="Migrations\20210305135434_Updated Department.Designer.cs" />
+    <Compile Remove="Migrations\20210305135748_Added City.cs" />
+    <Compile Remove="Migrations\20210305135748_Added City.Designer.cs" />
+    <Compile Remove="Migrations\20210305140045_Added City.cs" />
+    <Compile Remove="Migrations\20210305140045_Added City.Designer.cs" />
+    <Compile Remove="Migrations\20210305143544_Name Changes.cs" />
+    <Compile Remove="Migrations\20210305143544_Name Changes.Designer.cs" />
+    <Compile Remove="Migrations\20210315174454_PaymentAdd.cs" />
+    <Compile Remove="Migrations\20210315174454_PaymentAdd.Designer.cs" />
+    <Compile Remove="Migrations\20210315174631_PaymentAdd.cs" />
+    <Compile Remove="Migrations\20210315174631_PaymentAdd.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+  
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.1.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.12" />
+    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+  </ItemGroup>
+
+</Project>
